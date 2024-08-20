@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #141722;
+    font-family: Helvetica, sans-serif;
+}
+
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 0.4em 0.4em;
+    width: 100%;
+    padding: 10px 21px; 
+    font-size: 24px; 
+    background-color: #1A202E; 
+    color: white; 
+    border-radius: 5px;
+    outline: none; 
+    border: 3px solid #292F3E;
+}
+.form-select option {
+    color: black;
+    background-color: white;
+}
+
+.card-body{
+    background-color: #1A202E; 
+    color: white; 
+    border-radius: 15px;
+    outline: none; 
+    border: 3px solid #292F3E;
+}
+
+.betNow{
+    background-color: #24eb1f;
+    border-radius: 7px;
+    transition: all .3s;
+}
+.betNow:hover{
+    background-color: #1b751b;
+}

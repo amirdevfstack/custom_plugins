@@ -1,0 +1,274 @@
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.custom-product-layout {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+/* Top Timer */
+#countdown-timer {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff0000;
+    text-align: center;
+    margin: 20px auto;
+}
+
+/* Step Guide */
+.step-guide {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.step-guide ul {
+    list-style: none;
+    padding: 0;
+    font-size: 18px;
+}
+
+.step-guide li {
+    margin: 10px 0;
+}
+
+/* Left Section */
+.left-section {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.product-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.product-gallery img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.main-image {
+    text-align: center;
+}
+
+.main-image img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Thumbnail and Main Image Layout */
+.product-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Right Section */
+.right-section {
+    flex: 1;
+}
+
+.right-section h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.product-info {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.quantity-selector {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    text-align: center;
+    line-height: 30px;
+}
+
+.quantity-btn:hover {
+    background-color: #ddd;
+}
+
+.vip-pack {
+    margin-bottom: 20px;
+}
+
+.vip-btn {
+    margin: 5px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.vip-btn:hover {
+    background-color: #ddd;
+}
+
+.custom-text {
+    margin-bottom: 20px;
+}
+
+.next-step-btn {
+    padding: 15px 20px;
+    background-color: #0073aa;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.next-step-btn:hover {
+    background-color: #005177;
+}
+
+/* Product Details */
+.product-details {
+    margin-top: 40px;
+}
+
+.product-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-details p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.step-guide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; 
+    margin: 20px 0; 
+}
+
+.step-guide .step {
+    font-weight: bold;
+    margin: 0 10px; 
+}
+
+.step-guide .separator {
+    color: #777; 
+}
+
+.product-info {
+    margin-bottom: 20px;
+}
+
+.product-values span, .product-labels span {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.selected {
+    background-color: black;
+    color: white;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablets and larger mobile devices (portrait mode) */
+@media (max-width: 992px) {
+    .custom-product-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+    .left-section, .right-section {
+        margin-right: 0;
+        width: 100%;
+    }
+    .product-layout {
+        flex-direction: row;
+    }
+    .quantity-selector {
+        flex-wrap: wrap;
+    }
+    .quantity-btn {
+        width: 45px;
+        height: 45px;
+    }
+    .vip-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .vip-pack{
+        display: flex;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    .custom-product-layout {
+        padding: 0 10px;
+    }
+    .product-gallery img {
+        width: 60px;
+    }
+    .quantity-btn {
+        width: 40px;
+        height: 40px;
+    }
+    .vip-btn {
+        padding: 10px 5px;
+    }
+    .right-section h1 {
+        font-size: 24px;
+    }
+    .product-info {
+        font-size: 16px;
+    }
+}
+
+/* Smaller mobile devices */
+@media (max-width: 480px) {
+    .step-guide {
+        flex-direction: column;
+    }
+    .product-values span, .product-labels span {
+        display: block;
+        margin: 5px 0;
+    }
+    .quantity-selector {
+        justify-content: center;
+    }
+    .quantity-btn {
+        width: 35px;
+        height: 35px;
+    }
+    .vip-btn {
+        padding: 8px 5px;
+        font-size: 14px;
+    }
+    .next-step-btn {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+}
