@@ -1,16 +1,49 @@
 .cpf-container {
-    display: flex;
-    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
 }
 
+
 .cpf-filters {
-    align-self: flex-start;
     margin-bottom: 20px;
 }
 
-.cpf-products {
-    flex-grow: 1;
+.cpf-filters form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
+
+.cpf-filters select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
+.cpf-products {
+    margin-bottom: 20px;
+}
+
+.cpf-product-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cpf-product-list li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.cpf-product-list a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+}
+
 
 .cpf-bottom-section {
     display: flex;
@@ -20,25 +53,164 @@
 }
 
 .cpf-sort {
-    align-self: flex-start;
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
 }
 
+.cpf-sort select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
 .cpf-pagination {
-    align-self: flex-end;
-    text-align: right;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
 }
 
 .cpf-pagination a,
 .cpf-pagination .current-page {
-    padding: 5px 10px;
-    margin: 0 5px;
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
     text-decoration: none;
-    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     color: #333;
+    background-color: #f9f9f9;
+}
+
+.cpf-pagination a:hover {
+    background-color: #ddd;
 }
 
 .cpf-pagination .current-page {
     font-weight: bold;
     background-color: #333;
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* news filters added */
+/* Style for the filter form */
+#news-filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+#news-filter-form label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+#news-filter-form select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+#news-filter-form select:focus {
+    border-color: #0073aa;
+    outline: none;
+}
+
+/* Style for the filter submit button */
+#news-filter-form input[type="submit"] {
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#news-filter-form input[type="submit"]:hover {
+    background-color: #005c99;
+}
+
+/* Style for the news items */
+.news-item {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.news-item h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.news-item p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+.news-item:hover {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the pagination */
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.news-pagination span {
+    margin: 0 5px;
+}
+
+.news-pagination a {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #0073aa;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.news-pagination a:hover {
+    background-color: #0073aa;
+    color: #fff;
+}
+
+.news-pagination .current {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #0073aa;
+    border-radius: 4px;
+    background-color: #0073aa;
     color: #fff;
 }

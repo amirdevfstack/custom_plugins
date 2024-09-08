@@ -71,4 +71,53 @@ jQuery(document).ready(function($) {
 
     
     fetchProducts();
+
+
+
+
+   
+    filterNews();
+
+    
+    $('#news-filter-form select').change(function() {
+        filterNews(); 
+    });
+
+    
+    $(document).on('click', '.news-pagination a', function(e) {
+        e.preventDefault();
+        var paged = $(this).attr('href').split('paged=')[1]; 
+        filterNews(paged); 
+    });
+
+    function filterNews(paged = 1) {
+        var filterData = $('#news-filter-form').serialize(); 
+        filterData += '&paged=' + paged; 
+
+        $.ajax({
+            url: cpf_ajax.ajax_url,
+            type: 'POST',
+            data: filterData + '&action=filter_news', 
+            beforeSend: function() {
+                $('#news-results').html('<p>Loading...</p>'); 
+            },
+            success: function(response) {
+                $('#news-results').html(response); 
+            },
+            error: function(xhr, status, error) {
+                console.log('AJAX Error:', error); 
+            }
+        });
+    }
+
+
+   
+    
+
+
 });
+
+
+
+
+

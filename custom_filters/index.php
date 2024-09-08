@@ -1,14 +1,28 @@
 <?php
 /**
- * Plugin Name: Custom Filters
+ * Plugin Name: Products and posts filters
  * Description: Adds custom taxonomies for Range, Type, Industry, Pressure, and Power to products.
  * Version: 1.0
  * Author: Aamir Shahzad +923067772024 Whatsapp
  */
 
 
+ function cpf_enqueue_scripts() {
+    wp_enqueue_style('cpf-styles', plugin_dir_url(__FILE__) . 'css/styles.css');
+    wp_enqueue_script('cpf-scripts', plugin_dir_url(__FILE__) . 'js/script.js', array('jquery'), null, true);
+
+   
+    wp_localize_script('cpf-scripts', 'cpf_ajax', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce'    => wp_create_nonce('cpf_ajax_nonce')
+    ));
+}
+
+add_action('wp_enqueue_scripts', 'cpf_enqueue_scripts');
+
+
+
  function cpt_register_custom_taxonomies() {
-     // Register Range Taxonomy
      register_taxonomy('range', 'product', array(
          'labels' => array(
              'name' => 'Ranges',
@@ -36,7 +50,6 @@
          'rewrite' => array('slug' => 'range'),
      ));
  
-     // Register Type Taxonomy
      register_taxonomy('type', 'product', array(
          'labels' => array(
              'name' => 'Types',
@@ -63,8 +76,7 @@
          'query_var' => true,
          'rewrite' => array('slug' => 'type'),
      ));
- 
-     // Register Industry Taxonomy
+
      register_taxonomy('industry', 'product', array(
          'labels' => array(
              'name' => 'Industries',
@@ -92,7 +104,6 @@
          'rewrite' => array('slug' => 'industry'),
      ));
  
-     // Register Pressure Taxonomy
      register_taxonomy('pressure', 'product', array(
          'labels' => array(
              'name' => 'Pressures',
@@ -120,7 +131,6 @@
          'rewrite' => array('slug' => 'pressure'),
      ));
  
-     // Register Power Taxonomy
      register_taxonomy('power', 'product', array(
          'labels' => array(
              'name' => 'Powers',
@@ -151,24 +161,13 @@
  
  add_action('init', 'cpt_register_custom_taxonomies');
 
-function cpf_enqueue_scripts() {
-    wp_enqueue_style('cpf-styles', plugin_dir_url(__FILE__) . 'css/styles.css');
-    wp_enqueue_script('cpf-scripts', plugin_dir_url(__FILE__) . 'js/script.js', array('jquery'), null, true);
 
-   
-    wp_localize_script('cpf-scripts', 'cpf_ajax', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce'    => wp_create_nonce('cpf_ajax_nonce')
-    ));
-}
-
-add_action('wp_enqueue_scripts', 'cpf_enqueue_scripts');
 
 function cpf_display_filter() {
     ob_start();
     ?>
     <div class="cpf-container">
-        <!-- Top Left: Filter Dropdowns -->
+     
         <div class="cpf-filters">
             <form id="cpf-filter-form">
                 <select name="range" id="range">
@@ -223,24 +222,24 @@ function cpf_display_filter() {
             </form>
         </div>
 
-        <!-- Main Section: Product Listing with Pagination -->
+      
         <div id="cpf-results" class="cpf-products">
-            <?php cpf_fetch_products(1); // Load the first page of products ?>
+            <?php cpf_fetch_products(1);  ?>
         </div>
 
-        <!-- Bottom Section -->
+        
         <div class="cpf-bottom-section">
-            <!-- Bottom Left: Sort By -->
+            
             <div class="cpf-sort">
                 <select id="sortby">
                     <option value="popularity">Most Popular</option>
-                    <!-- Add more sorting options here -->
+                  
                 </select>
             </div>
 
-            <!-- Bottom Right: Pagination -->
+           
             <div class="cpf-pagination">
-                <!-- Pagination will be handled dynamically -->
+               
             </div>
         </div>
     </div>
@@ -415,3 +414,207 @@ function cpf_filter_products() {
 
 add_action('wp_ajax_cpf_filter_products', 'cpf_filter_products');
 add_action('wp_ajax_nopriv_cpf_filter_products', 'cpf_filter_products');
+
+function news_cpt() {
+    $labels = array(
+        'name' => 'News',
+        'singular_name' => 'News',
+        'menu_name' => 'News',
+        'name_admin_bar' => 'News',
+        'add_new' => 'Add New',
+        'add_new_item' => 'Add New News',
+        'new_item' => 'New News',
+        'edit_item' => 'Edit News',
+        'view_item' => 'View News',
+        'all_items' => 'All News',
+        'search_items' => 'Search News',
+        'parent_item_colon' => 'Parent News:',
+        'not_found' => 'No News found.',
+        'not_found_in_trash' => 'No News found in Trash.'
+    );
+    
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'query_var' => true,
+        'rewrite' => array( 'slug' => 'news' ),
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => 5,
+        'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt', 'comments' ),
+    );
+    
+    register_post_type( 'news', $args );
+}
+add_action( 'init', 'news_cpt' );
+
+
+function register_news_taxonomies() {
+    $taxonomies = array(
+        'category' => array(
+            'label' => 'Categories',
+            'singular_label' => 'Category',
+            'hierarchical' => true
+        ),
+        'tags' => array(
+            'label' => 'Tags',
+            'singular_label' => 'Tag',
+            'hierarchical' => false
+        ),
+        'authors' => array(
+            'label' => 'Authors',
+            'singular_label' => 'Author',
+            'hierarchical' => true
+        ),
+        'locations' => array(
+            'label' => 'Locations',
+            'singular_label' => 'Location',
+            'hierarchical' => true
+        ),
+        'topics' => array(
+            'label' => 'Topics',
+            'singular_label' => 'Topic',
+            'hierarchical' => true
+        ),
+    );
+
+    foreach ( $taxonomies as $taxonomy => $args ) {
+        $labels = array(
+            'name' => $args['label'],
+            'singular_name' => $args['singular_label'],
+            'search_items' => 'Search ' . $args['label'],
+            'all_items' => 'All ' . $args['label'],
+            'parent_item' => $args['hierarchical'] ? 'Parent ' . $args['singular_label'] : '',
+            'parent_item_colon' => $args['hierarchical'] ? 'Parent ' . $args['singular_label'] . ':' : '',
+            'edit_item' => 'Edit ' . $args['singular_label'],
+            'update_item' => 'Update ' . $args['singular_label'],
+            'add_new_item' => 'Add New ' . $args['singular_label'],
+            'new_item_name' => 'New ' . $args['singular_label'] . ' Name',
+            'menu_name' => $args['label'],
+        );
+
+        register_taxonomy(
+            $taxonomy,
+            'news',
+            array(
+                'hierarchical' => $args['hierarchical'],
+                'labels' => $labels,
+                'show_ui' => true,
+                'show_admin_column' => true,
+                'query_var' => true,
+                'rewrite' => array( 'slug' => $taxonomy ),
+            )
+        );
+    }
+}
+add_action( 'init', 'register_news_taxonomies' );
+
+
+function news_filter_shortcode() {
+    ob_start();
+    
+    $taxonomies = array('category', 'tags', 'authors', 'locations', 'topics');
+    
+    echo '<form id="news-filter-form" method="GET" action="' . esc_url(home_url('/')) . '">';
+    
+    foreach ($taxonomies as $taxonomy) {
+        $terms = get_terms(array(
+            'taxonomy' => $taxonomy,
+            'hide_empty' => false,
+        ));
+        
+        if (!empty($terms) && !is_wp_error($terms)) {
+            echo '<label for="' . esc_attr($taxonomy) . '">' . ucfirst($taxonomy) . ':</label>';
+            echo '<select name="' . esc_attr($taxonomy) . '" id="' . esc_attr($taxonomy) . '">';
+            echo '<option value="">Select ' . ucfirst($taxonomy) . '</option>';
+            
+            foreach ($terms as $term) {
+                echo '<option value="' . esc_attr($term->term_id) . '">' . esc_html($term->name) . '</option>';
+            }
+            
+            echo '</select>';
+        }
+    }
+    
+    echo '<input type="submit" value="Filter">';
+    echo '</form>';
+    
+    echo '<div id="news-results"></div>'; 
+    
+    return ob_get_clean();
+}
+add_shortcode('news_filter', 'news_filter_shortcode');
+
+
+function filter_news_by_taxonomies() {
+    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+
+    $args = array(
+        'post_type' => 'news',
+        'posts_per_page' => 2, 
+        'paged' => $paged,
+        'post_status' => 'publish',
+        'tax_query' => array(
+            'relation' => 'OR',
+        )
+    );
+
+    $taxonomies = array('category', 'tags', 'authors', 'locations', 'topics');
+    
+    foreach ($taxonomies as $taxonomy) {
+        if (isset($_POST[$taxonomy]) && !empty($_POST[$taxonomy])) {
+            $args['tax_query'][] = array(
+                'taxonomy' => $taxonomy,
+                'field'    => 'id',
+                'terms'    => intval($_POST[$taxonomy]),
+            );
+        }
+    }
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            echo '<div class="news-item">';
+            echo '<h2>' . get_the_title() . '</h2>';
+            echo '<p>' . get_the_excerpt() . '</p>';
+            echo '</div>';
+        }
+
+        
+        $pagination_links = paginate_links(array(
+            'total'   => $query->max_num_pages,
+            'current' => $paged,
+            'format'  => '?paged=%#%',
+            'prev_text' => '&laquo;',
+            'next_text' => '&raquo;',
+            'type' => 'array', 
+        ));
+
+        if ($pagination_links) {
+            echo '<div class="pagination">';
+            foreach ($pagination_links as $link) {
+               
+                $link = preg_replace('/href="([^"]+)"/', 'href="$1" data-page="' . $paged . '"', $link);
+                echo '<span class="news-pagination">' . $link . '</span>';
+            }
+            echo '</div>';
+        }
+    } else {
+        echo '<p>No posts found.</p>';
+    }
+
+    wp_reset_postdata();
+
+    wp_die(); 
+}
+
+add_action('wp_ajax_filter_news', 'filter_news_by_taxonomies');
+add_action('wp_ajax_nopriv_filter_news', 'filter_news_by_taxonomies');
+
+

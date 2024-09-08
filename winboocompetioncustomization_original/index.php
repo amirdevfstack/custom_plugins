@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Competition Customization
+Plugin Name: Competition Customization Orignal
 Description: Customizations for the WooCommerce product details page for win.boo competition.
 Version: 1.0
-Author: Waseem Ahmad
+Author: Waseem Ahmad1
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -441,7 +441,6 @@ add_action('manage_winner_posts_custom_column', 'custom_winner_column', 10, 2);
 
 ///slider admin settings end
 
-
 //Elemntor widgets started
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -474,26 +473,47 @@ add_action('wp_enqueue_scripts', 'enqueue_custom_widget_styles');
 
 
 
-//top competion section registeration
 add_action( 'elementor/widgets/widgets_registered', function() {
     require_once __DIR__ . '/widgets/competition-section-widget.php';
 });
 
-// Register widget
-function register_custom_background_with_image_widget($widgets_manager) {
+
+function register_custom_widgets($widgets_manager) {
     require_once(__DIR__ . '/widgets/custom-background-with-image-widget.php');
     $widgets_manager->register(new \Elementor\Custom_Background_With_Image_Widget());
 
-    require_once __DIR__ . '/widgets/winner-slider-widget.php';
-    \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new \Elementor\Winner_Slider_Widget());
+    require_once(__DIR__ . '/widgets/winner-slider-widget.php');
+    $widgets_manager->register(new \Elementor\Winner_Slider_Widget());
 
+   
+    require_once(__DIR__ . '/widgets/countdown-banner-widget.php');
+    $widgets_manager->register(new \Elementor\Countdown_Banner_Widget());
+
+
+    require_once(__DIR__ . '/widgets/winner-details-widget.php');
+    $widgets_manager->register(new \Elementor\Winner_Details_Widget());
+
+
+    require_once(__DIR__ . '/widgets/draw-certificate-widget.php');
+    $widgets_manager->register(new \Elementor\Draw_Certificate_Widget());
+
+
+
+    require_once(__DIR__ . '/widgets/swiper-slider-widget.php'); 
+    $widgets_manager->register_widget_type(new \Swiper_Slider_Widget());
+
+
+    require_once( __DIR__ . '/widgets/custom-blog-post-widget.php' );
+    $widgets_manager->register( new \Elementor\Custom_Blog_Post_Widget() );
+
+
+   
 
 }
-add_action('elementor/widgets/register', 'register_custom_background_with_image_widget');
+
+add_action('elementor/widgets/register', 'register_custom_widgets');
 
 
 
-
-
-
+  
 ?>

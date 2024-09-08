@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
     var selectedQuantity = 1;
     var selectedDiscount = 0;
-    var baseChance = 60; 
+    var totalTickets = phpVars.totalQuantity; // Get the total number of tickets
 
     function getDiscountRate(quantity) {
         var discountRate = 0;
@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
     }
 
     function updateChanceToWin($element, quantity) {
-        var chance = `1/${Math.ceil(baseChance / quantity)} chance to win`;
+        var chance = `1/${Math.ceil(totalTickets / quantity)} chance to win`; // Calculate based on total tickets
         $element.find('.chance-to-win').text(chance);
     }
 
@@ -113,15 +113,18 @@ jQuery(document).ready(function($) {
         }, 1000);
     }
 
-    var totalQuantity = phpVars.totalQuantity;
     var soldQuantity = phpVars.soldQuantity;
-    var soldPercentage = (soldQuantity / totalQuantity) * 100;
+    var soldPercentage = (soldQuantity / totalTickets) * 100;
     $('#tickets-sold-count').text(soldQuantity);
-    $('#total-tickets').text(totalQuantity);
+    $('#total-tickets').text(totalTickets);
     $('#sold-percentage').text(soldPercentage.toFixed(0) + '%');
     $('.progress-bar-fill').css('width', soldPercentage.toFixed(0) + '%');
 
     // Initial update for chance to win based on default selected quantity
     updateAllChances();
     updateChanceToWin($('.quantity-btn.selected, .vip-btn.selected'), selectedQuantity);
+	
+	
+	
+	
 });

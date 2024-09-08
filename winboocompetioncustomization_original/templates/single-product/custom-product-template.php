@@ -88,13 +88,13 @@ get_header('shop');
            <div class="progress-container">
             <div class="progress-info">
                 <div class="tickets-sold">
-                    <img src="https://win.boo/wp-content/uploads/2024/07/ticket-removebg-preview1.png" style="width: 18px; margin-right: 4px;">Tickets sold: <span id="tickets-sold-count">2319</span> of <span id="total-tickets">9999</span>
+                    <img src="https://win.boo/wp-content/uploads/2024/07/ticket-removebg-preview1.png" style="width: 18px; margin-right: 4px;">Tickets sold: <span id="tickets-sold-count" style="margin: 0px 4px;">2319</span> (of) <span style="margin: 0px 4px;" id="total-tickets">9999</span>
                 </div>
                 <div class="sold-percentage">
                     <span id="sold-percentage">23%</span> sold
                 </div>
             </div>
-            <div class="progress-bar-wrapper">
+            <div class="progress-bar-wrapper" style="background: none;">
                 <div class="progress-bar">
                     <div class="progress-bar-fill"></div>
                 </div>
